@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D70560F5-5EEA-43DB-BE4A-A032E11E5BAE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hsg.BLL</RootNamespace>
+    <AssemblyName>Hsg.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>
+    </NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ICON设计-CM.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BinCodeManager.cs" />
+    <Compile Include="BSRecord.cs" />
+    <Compile Include="config\DutManagerCfg.cs" />
+    <Compile Include="config\MesClientConfig.cs" />
+    <Compile Include="config\SlaveModeConfig.cs" />
+    <Compile Include="config\TempCtrBoardConfig.cs" />
+    <Compile Include="DutsLogicalMap.cs" />
+    <Compile Include="DutsStateManager.cs" />
+    <Compile Include="Model\DutsManager.cs" />
+    <Compile Include="Model\DutsManager.StateMachine.cs" />
+    <Compile Include="Model\BSTeam.cs" />
+    <Compile Include="Model\BSTeam.StateMachine.cs" />
+    <Compile Include="Model\BSTeam.UIState.cs" />
+    <Compile Include="config\BSConfig.cs" />
+    <Compile Include="config\BSTeamConfig.cs" />
+    <Compile Include="config\Config.cs" />
+    <Compile Include="config\MBConfig.cs" />
+    <Compile Include="config\UdpSenderConfig.cs" />
+    <Compile Include="Model\DutMaster.cs" />
+    <Compile Include="Model\DutMaster.StateMachine.cs" />
+    <Compile Include="Model\DutMaster.UIState.cs" />
+    <Compile Include="DutProtocol.cs" />
+    <Compile Include="DutConn.cs" />
+    <Compile Include="Model\BSController.cs" />
+    <Compile Include="Model\BSController.stateMachine.cs" />
+    <Compile Include="Model\BSController.UIState.cs" />
+    <Compile Include="Model\DutsManager.UiState.cs" />
+    <Compile Include="Model\NormalTempCtrTeam.StateMachine.cs" />
+    <Compile Include="Model\NormalTempCtrTeam.cs" />
+    <Compile Include="Model\HightTempCtrTeam.cs" />
+    <Compile Include="Model\HightTempCtrTeam.StateMachine.cs" />
+    <Compile Include="Net\UdpSender.cs" />
+    <Compile Include="PolicyCfg\CommonPolicy.cs" />
+    <Compile Include="PolicyCfg\ExtraContent.cs" />
+    <Compile Include="PolicyCfg\PolicyCfgBase.cs" />
+    <Compile Include="PolicyConfig.cs" />
+    <Compile Include="PolicyFile.cs" />
+    <Compile Include="PolicyManager.cs" />
+    <Compile Include="HsgCBCProtocol.cs" />
+    <Compile Include="CBCProtocol.cs" />
+    <Compile Include="Net\MBMaster.cs" />
+    <Compile Include="Net\TcpClientConn.cs" />
+    <Compile Include="Net\UdpServer.cs" />
+    <Compile Include="HCProtocol.cs" />
+    <Compile Include="HCProtocol.Json.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="config\TcpClientConfig.cs" />
+    <Compile Include="Service\AlarmService.cs" />
+    <Compile Include="Service\MesClientService.cs" />
+    <Compile Include="Service\TBCommunicate.cs" />
+    <Compile Include="SystemStatus.cs" />
+    <Compile Include="TempCtrTeam.cs" />
+    <Compile Include="TempCtr\TempCtrBoardClient.cs" />
+    <Compile Include="TempCtr\TempProtocol.cs" />
+    <Compile Include="TestBoardConfig.cs" />
+    <Compile Include="ViewModel\IBSViewModel.cs" />
+    <Compile Include="ViewModel\IDutsMgrViewModel.cs" />
+    <Compile Include="ViewModel\ITeamViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Hsg.Common.csproj">
+      <Project>{6568e169-95c8-4ade-98d6-ed8c903db6b3}</Project>
+      <Name>Hsg.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModbusLib\ModbusLib.csproj">
+      <Project>{85c7e0a0-b14a-40c8-ad52-2475111ae822}</Project>
+      <Name>ModbusLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <Content Include="ICON设计-CM.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
