@@ -1,0 +1,46 @@
+CREATE TABLE workStage(
+	id INTEGER NOT NULL PRIMARY KEY,
+	name VARCHAR(32) NOT NULL,
+	description VARCHAR(32) NOT NULL,
+	addTotal BOOLEAN DEFAULT FALSE,
+	addPass BOOLEAN DEFAULT FALSE);
+	
+INSERT INTO WorkStage(id, name, description, addTotal, addPass) 
+VALUES 
+	(0, 'FT', '首测', TRUE, TRUE),
+	(1, 'FRT', '失败复测', FALSE, FALSE), 
+	(2, 'PRT', '成功复测', FALSE, TRUE);
+
+CREATE TABLE workOrder (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    orderNo VARCHAR(32) NOT NULL,
+    materialNo VARCHAR(32) NOT NULL,
+    workOrderNo VARCHAR(32) NOT NULL,
+    workStageId INT NOT NULL,
+    testCfg BLOB NOT NULL,
+    cfgName VARCHAR(128),
+    TmpState INT8 NOT NULL DEFAULT 0,
+    timeoutMinute INTEGER NOT NULL,
+	cfgDescription  VARCHAR(256),
+    closed BOOLEAN DEFAULT FALSE,
+    createTime DATETIME DEFAULT (datetime('now')),
+    UNIQUE(orderNo, workOrderNo),
+	FOREIGN KEY (workStageId) REFERENCES WorkStage(id)
+);
+
+CREATE VIEW workOrderView AS
+SELECT w.id AS workStageId, w.name AS workStageName, w.description, w.addTotal, w.addPass,
+       o.id AS workOrderId, o.orderNo, o.materialNo, o.workOrderNo, o.testCfg, o.cfgName, o.TmpState, o.timeoutMinute, o.closed, o.createTime
+FROM workOrder o
+JOIN workStage w ON w.id = o.workStageId;
+
+CREATE TABLE productDetail(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  workOrderId INTEGER,
+  bin1Count BIGINT DEFAULT 0,
+  bin2Count BIGINT DEFAULT 0,
+  bin3Count BIGINT DEFAULT 0,
+  bin4Count BIGINT DEFAULT 0,
+  bin5Count BIGINT DEFAULT 0,
+  FOREIGN KEY (workOrderId) REFERENCES workOrder(id)
+);

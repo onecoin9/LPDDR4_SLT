@@ -1,0 +1,118 @@
+{
+  "name": "E2E-8Gb-SingleCH",
+  "rankEnabled": true,
+  "pl1Enabled": true,
+  "pl2Enabled": true,
+  "rankCapacityGb": [
+    0.5,
+    0.5
+  ],
+  "channels": {
+    "ch1": true,
+    "ch2": false
+  },
+  "mr": {
+    "ch1": [
+      {
+        "name": "MR5_2",
+        "value": "",
+        "checked": true
+      }
+    ],
+    "ch2": []
+  },
+  "params": [
+    {
+      "id": 1,
+      "name": "VDD1(mV)",
+      "value": "1900",
+      "checked": true,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 2,
+      "name": "VDD2H(mV)",
+      "value": "1150",
+      "checked": true,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 3,
+      "name": "VDD2L(mV)",
+      "value": "1100",
+      "checked": true,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 4,
+      "name": "VDDQ(mV)",
+      "value": "600",
+      "checked": true,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 5,
+      "name": "测试频率(M)",
+      "value": "3733",
+      "checked": true,
+      "options": [
+        "1600",
+        "2400",
+        "3200",
+        "3733",
+        "4266"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "TRCD",
+      "value": "9",
+      "checked": true,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 7,
+      "name": "TRAS时序",
+      "value": "12",
+      "checked": true,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 8,
+      "name": "TWTR",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    }
+  ],
+  "pl2": {
+    "testMode": "全映射读写测试",
+    "ascEnabled": true,
+    "ascOrder": "升序",
+    "patterns": {
+      "全映射读写测试": [
+        {
+          "id": 1,
+          "name": "test_random_value",
+          "checked": true,
+          "order": "1",
+          "param": ""
+        }
+      ]
+    }
+  }
+}

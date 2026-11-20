@@ -1,0 +1,836 @@
+昂科测试系统Tester与Handler交互接口说明
+目录
+昂科测试系统Tester与Handler交互接口说明1
+引言2
+本档案适用对象2
+版本记录2
+一. 协议说明3
+二. 系统框架图3
+三. 通用结构体4
+四. Handler控制Tester场景的通讯协议5
+1.1. 查询协议版本号5
+1.2. 开始批量5
+1.3. 设定使能7
+1.4. 结束批量8
+1.5. 开始测试10
+1.6. 结束测试12
+1.7. 报警信息14
+五. Tester控制Handler场景的通讯协议15
+1.1. 切换模式15
+1.2. 查询协议版本号16
+1.3. 设定使能16
+1.4. 开始批量18
+1.5. 结束批量19
+1.6. 开始测试21
+1.7. 结束测试22
+1.8. 报警信息24
+1.9. 设定设备动作25
+1.10. 读取设备动作26
+引言
+    本档案用于介绍通用测试软件接口说明。
+本档案适用对象
+软件工程师 
+版本记录
+文档版本
+文档编者
+发布日期
+修改说明
+V1.0
+Black
+2025-04-19
+初稿拟定。 
+V1.1
+Black
+2025-04-19
+Dut数量为24，格式更正
+V1.2
+Black
+2025-04-27
+支持两种场景
+V1.3
+Black
+2025-04-28
+Tester控制handler场景，新增设定使能接口
+V1.4
+Black
+2025-04-29
+两种场景，接口保持一致
+V1.5
+Black
+2025-04-29
+会议对齐后进行修改，增加查询协议版本号，修改设定使能内容
+V1.6
+Black
+2025-05-12
+内容修正
+V1.7
+Black
+2025-05-16
+Tester添加切换模式指令
+V1.8
+Black
+2025-06-09
+增加设备动作读取和设定的指令
+V1.9
+Black
+2025-07-31
+开始批量和设定使能合并
+V1.10
+Black
+2025-10-21
+开始测试修正
+协议说明
+采用TCP短连接
+TCP 短连接指的是在进行数据传输时，客户端与服务器先建立 TCP 连接，待一次（或一轮）数据传输任务完成后，就立即断开该连接。若后续还有数据需要传输，就再次重新建立新的 TCP 连接
+两个软件通过TCP短连接通信时，通常至少一方需要作为服务端，另一方作为客户端，原因如下： 
+服务端负责监听（listen）指定端口，等待客户端发起连接请求
+客户端主动发起连接，向服务端的IP和端口发送连接请求
+连接建立后，客户端发送请求，服务端处理并返回响应
+通信完成后，连接关闭
+所以如果两个软件都只是客户端，且都不监听端口，彼此之间就无法建立TCP连接。
+Handler 服务端IP: 192.168.1.100 端口：64101
+Tester服务端IP: 192.168.1.88 端口：64100
+系统框架图
+通用结构体
+客户端发送格式
+{    "method": "method_name",    "data": {}}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+data
+Object
+存放与当前命令相关的具体数据
+根据具体情况，自行添加
+服务端返回格式
+{    "method": "method_name",    "status": "success",    "data": {}}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+根据具体情况，自行添加
+Handler控制Tester场景的通讯协议
+查询协议版本号
+功能：Handler查询当前协议版本号
+客户端：Handler
+服务端：Tester
+Handler—>Tester
+Handler发送给Tester的示例:
+{    "method": "getversion",    "data": {}}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+data
+Object
+存放与当前命令相关的具体数据
+Tester返回给Handler的示例
+{    "method": "getversion",    "status": "success",    "data": {        "version": "1.0.0.0"    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+version
+String
+版本号
+开始批量
+功能：Handler软件输入生产信息，点击开始批量发送此消息给Tester
+客户端：Handler
+服务端：Tester
+Handler—>Tester
+Handler发送给Tester的示例:
+{    "method": "lotstart",    "data": {        "lotid": "lot001",        "productid": "product001",        "recipe": "recipe001",        "hardware": "hard001",
+        "operator": "op001",
+        "selfcheck": true    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+data
+Object
+批次内容根据客户确认，只添加不修改
+lotid
+String
+批次号，来自界面输入
+productid
+String
+产品号，来自界面输入
+recipe
+String
+测试文件名，来自界面输入
+hardware
+String
+Hardware，来自界面输入
+operator
+String
+Operator，来自界面输入
+selfcheck
+Bool
+是否需要自检
+Tester返回给Handler的示例：
+{    "method": "lotstart",    "status": "success",    "data": {
+    "setenable": [            {                "bibid": 1,
+                "enable": "1110111101111111110111"            },            {                "bibid": 2,
+                "enable": "1111111101111111110111"            },
+            {                "bibid": 3,
+                "enable": "1111101111111111011111"            }
+........    ]
+}}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+设定使能内容
+selfcheck为true要返回setenable信息，selfcheck为false则不需要返回
+bibid
+Int
+板子ID
+enable
+String
+使能字符串
+字符串由0和1构成，0代表禁用，1代表启用，字符串长度取决site数量，开头第一个为第一个site，以此类推
+结束批量
+功能：Handler软件点击结束批量发送此消息给Tester
+客户端：Handler
+服务端：Tester
+Handler—>Tester
+Handler发送给Tester的示例:
+{    "method": "lotend",    "data": {}}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+data
+Object
+存放与当前命令相关的具体数据
+Tester返回给Handler的示例
+{    "method": "lotend",    "status": "success",    "data": {}}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+开始测试
+功能：Handler将BIB板放入库中并到位，发送消息通知Tester可以测试
+客户端：Handler
+服务端：Tester
+Handler—>Tester
+Handler发送给Tester的示例:
+{    "method": "teststart",    "data": {        "bibid": 1,        "sites": [            {                "siteid": 1,
+                "IsEnable": true,                "sitesn": "SN001",
+"SocketSN": "SN001"            },            {                "siteid": 2,
+                "IsEnable": true,                "sitesn": "SN002"
+"SocketSN": "SN001"            },            {                "siteid": 3,
+                "IsEnable": false,                "sitesn": "",
+"SocketSN": "SN001"            }
+........        ]    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+bibid
+Int
+板子ID
+sites
+Object
+site信息
+根据site数量修改，示例为3个site
+siteid
+Int
+SocketID
+IsEnable
+Bool
+是否启用
+sitesn
+String
+产品SN，如有
+SocketSN
+String
+产品SocketSN，如有
+Tester返回给Handler的示例：
+{    "method": "teststart",    "status": "success",    "data": {}
+}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+结束测试
+功能：BIB板完成测试，发送消息给handler用于分BIN
+客户端：Tester
+服务端：Handler
+Tester—>Handler
+Tester发送给Handler的示例:
+{    "method": "testend",    "data": {        "bibid": 1,        "sites": [            {                "siteid": 1,                "result": 2            },            {                "siteid": 2,                "result": 1            },            {                "siteid": 3,                "result": 0            },
+......        ]    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+bibid
+Int
+板子ID
+sites
+Object
+site信息
+根据site数量修改，示例为3个site
+siteid
+Int
+SocketID
+result
+Int
+socket结果
+目前0是禁用，1是良品，2是不良，其他可扩展
+Handler返回给Tester的示例：
+{    "method": "testend",    "status": "success",    "data": {    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+报警信息
+功能：Tester产生报警需要产生蜂鸣，发送消息给Handler
+客户端：Tester
+服务端：Handler
+Tester—>Handler
+Tester发送给Handler的示例:
+{    "method": "alarm",    "data": {        "message": "测试异常"    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+message
+String
+报警内容
+Handler返回给Tester的示例：
+{    "method": "alarm",    "status": "success",    "data": {    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+Tester控制Handler场景的通讯协议
+切换模式
+功能：Tester切换模式
+客户端：Tester
+服务端：Handler
+Tester—>Handler
+Tester发送给Handler的示例:
+{    "method": "switch",    "data": {
+        "leader": "tester",
+        "model": "auto"
+}}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+data
+Object
+存放与当前命令相关的具体数据
+leader
+String
+发起者
+handler和tester
+model
+string
+模式
+auto和maunal
+Handler返回给Tester的示例
+{    "method": "switch",    "status": "success",    "data": {}}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+查询协议版本号
+功能：Tester查询当前协议版本号
+客户端：Tester
+服务端：Handler
+Tester—>Handler
+Tester发送给Handler的示例:
+{    "method": "getversion",    "data": {}}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+data
+Object
+存放与当前命令相关的具体数据
+Handler返回给Tester的示例
+{    "method": "getversion",    "status": "success",    "data": {        "version": "1.0.0.0"    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+version
+String
+版本号
+开始批量
+功能：Tester软件输入生产信息，点击开始批量发送此消息给Handler
+客户端：Tester
+服务端：Handler
+Tester—>Handler
+Tester发送给Handler的示例:
+{    "method": "lotstart",    "data": {        "lotid": "lot001",        "productid": "product001",        "recipe": "recipe001",        "hardware": "hard001",        "operator": "op001",
+        "taskdata": "20250101.tsk",
+        "lotcount": 1000,
+        "setenable": [            {                "bibid": 1,
+                "enable": "1110111101111111110111"            },            {                "bibid": 2,
+                "enable": "1111111101111111110111"            },
+            {                "bibid": 3,
+                "enable": "1111101111111111011111"            }
+........        ]
+    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+lotid
+String
+批次号，来自界面输入
+productid
+String
+产品号，来自界面输入
+recipe
+String
+测试文件名，来自界面输入
+hardware
+String
+Hardware，来自界面输入
+operator
+String
+Operator，来自界面输入
+taskdata
+String 
+Handler工程文件
+lotcount
+Int
+批次数量
+setenable
+Object
+设定使能内容
+bibid
+Int
+板子ID
+enable
+String
+使能字符串
+字符串由0和1构成，0代表禁用，1代表启用，字符串长度取决site数量，开头第一个为第一个site，以此类推
+Handler返回给Tester的示例：
+{    "method": "lotstart",    "status": "success",    "data": {}}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+为空
+结束批量
+功能：Tester软件点击结束批量发送此消息给Handler
+客户端：Tester
+服务端：Handler
+Tester—>Handler
+Tester发送给Handler的示例:
+{    "method": "lotend",    "data": {}}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+data
+Object
+存放与当前命令相关的具体数据
+Handler返回给Tester的示例
+{    "method": "lotend",    "status": "success",    "data": {}}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+开始测试
+功能：Handler将BIB板放入库中并到位，发送消息通知Tester可以测试
+客户端：Handler
+服务端：Tester
+Handler—>Tester
+Handler发送给Tester的示例:
+{    "method": "teststart",    "data": {        "bibid": 1,        "sites": [            {               "siteid": 1,
+                "IsEnable": true,                "sitesn": "SN001",
+"SocketSN": "SN001"            },            {                "siteid": 2,
+                "IsEnable": true,                "sitesn": "SN002",
+"SocketSN": "SN001"            },            {                "siteid": 3,
+                "IsEnable": false,                "sitesn": "",
+"SocketSN": "SN001"            }
+........        ]    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+bibid
+Int
+板子ID
+sites
+Object
+site信息
+根据site数量修改，示例为3个site
+siteid
+Int
+SocketID
+IsEnable
+Bool
+是否启用
+sitesn
+String
+产品SN，如有
+SocketSN
+String
+产品SocketSN，如有
+Tester返回给Handler的示例：
+{    "method": "teststart",    "status": "success",    "data": {}
+}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+结束测试
+功能：BIB板完成测试，发送消息给handler用于分BIN
+客户端：Tester
+服务端：Handler
+Tester—>Handler
+Tester发送给Handler的示例:
+{    "method": "testend",    "data": {        "bibid": 1,        "sites": [            {                "siteid": 1,                "result": 2            },            {                "siteid": 2,                "result": 1            },            {                "siteid": 3,                "result": 0            },
+......        ]    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+bibid
+Int
+板子ID
+sites
+Object
+site信息
+根据site数量修改，示例为3个site
+siteid
+Int
+SocketID
+result
+Int
+socket结果
+目前0是禁用，1是良品，2是不良，其他可扩展
+Handler返回给Tester的示例：
+{    "method": "testend",    "status": "success",    "data": {    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+报警信息
+功能：Tester产生报警需要产生蜂鸣，发送消息给Handler
+客户端：Tester
+服务端：Handler
+Tester—>Handler
+Tester发送给Handler的示例:
+{    "method": "alarm",    "data": {        "message": "测试异常"    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+message
+String
+报警内容
+Handler返回给Tester的示例：
+{    "method": "alarm",    "status": "success",    "data": {    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+设定设备动作
+功能：Tester发送消息给Handler，Handler执行对应动作
+客户端：Tester
+服务端：Handler
+Tester—>Handler
+Tester发送给Handler的示例:
+{    "method": "setmachineaction",    "data": {
+        "bibid": 1,        "action": "bibup"    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+bibid
+Int
+板子ID
+action
+String
+设备动作
+bibup为顶升
+bibdown为下降
+需要另外新增的话，定义action命名，两边定义规则
+Handler返回给Tester的示例：
+{    "method": "setmachineaction",    "status": "success",    "data": {    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+读取设备动作
+功能：Tester发送消息给Handler，Handler获取该动作状态
+客户端：Tester
+服务端：Handler
+Tester—>Handler
+Tester发送给Handler的示例:
+{    "method": "getmachineaction",    "data": {
+        "bibid": 1,        "action": "bibup"    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+bibid
+Int
+板子ID
+action
+String
+设备动作
+bibup为顶升
+bibdown为下降
+需要另外新增的话，定义action命名，两边定义规则
+Handler返回给Tester的示例：
+{    "method": "getmachineaction",    "status": "success",    "data": { 
+        "bibid": 1,
+        "actionstatus":  true,    }}
+Json格式说明（UTF8编码）：
+名称
+类型
+说明
+备注
+method
+String
+方法名
+status
+String
+状态
+success和fail
+data
+Object
+存放与当前命令相关的具体数据
+bibid
+Int
+板子ID
+actionstatus
+Bool
+动作执行状态

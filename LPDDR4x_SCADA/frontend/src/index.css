@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   主题令牌 —— 所有组件只引用 var(--xxx)，切换 data-theme 即换肤
+   语义：
+   bg/panel/line/strip/chrome   页面底/面板/边框/次级头条/标签栏底
+   text/text2/text3             主/次/弱 文字
+   accent*                      主色（激活态、按钮、进度条）
+   topbar-*                     顶栏
+   table/zebra/row-hover/sel*   表格
+   input*                       表单控件
+   st-*                         状态五色（PASS/FAIL/测试中/空闲/离线）
+   log-*                        日志终端
+   btn-*                        普通按钮（.btn-gray）
+   ============================================================ */
+
+@layer base {
+  :root,
+  [data-theme='dark'] {
+    /* 深色 —— 石墨 × 琥珀 */
+    --bg: #141519; --panel: #1d1f26; --line: #33363f; --strip: #22242c; --chrome: #17181d; --chrome-text: #8a857c;
+    --text: #e8e6e1; --text2: #9a958b; --text3: #6f6a62;
+    --accent: #f0a028; --accent-hi: #ffb638; --accent-to: #d97e12; --accent-line: #c97f14; --accent-text: #1a1206;
+    --topbar-from: #1c1d24; --topbar-to: #101116; --topbar-text: #f5f3ee; --topbar-sub: #6f6a62; --topbar-nav: #9a958b;
+    --table: #1a1c22; --zebra: #1e2028; --row-hover: #262a33; --sel: #7a5410; --sel-text: #fff4dd; --sel-sub: #f0d9ae;
+    --input: #141519; --input-line: #3d404b;
+    --st-pass: #3fb950; --st-fail: #f85149; --st-testing: #ffd60a; --st-idle: #e8e6e1; --st-offline: #5c616b;
+    --log-bg: #0f1014; --log-info: #c9c4bb; --log-warn: #e8b339; --log-ts: #6f6a62; --log-ch: #f0a028;
+    --btn-from: #2b2e37; --btn-to: #22242c; --btn-line: #3d404b; --btn-text: #d6d3cd;
+    --scrollbar: #3a3d47;
+  }
+
+  [data-theme='light'] {
+    /* 浅色 —— 暖白极简 · 琥珀点缀 */
+    --bg: #f4f5f7; --panel: #ffffff; --line: #d8dbe0; --strip: #f0f1f4; --chrome: #e9eaee; --chrome-text: #5f6470;
+    --text: #23252b; --text2: #5f6470; --text3: #9aa0ab;
+    --accent: #d97e12; --accent-hi: #f0a028; --accent-to: #b96f0e; --accent-line: #b96f0e; --accent-text: #ffffff;
+    --topbar-from: #ffffff; --topbar-to: #e8e9ed; --topbar-text: #23252b; --topbar-sub: #9aa0ab; --topbar-nav: #5f6470;
+    --table: #ffffff; --zebra: #f6f7f9; --row-hover: #fdf1de; --sel: #d97e12; --sel-text: #ffffff; --sel-sub: #ffe9c4;
+    --input: #ffffff; --input-line: #c9cdd4;
+    --st-pass: #1a7f37; --st-fail: #cf222e; --st-testing: #c98f00; --st-idle: #c9cdd4; --st-offline: #9aa0ab;
+    --log-bg: #101116; --log-info: #c9c4bb; --log-warn: #e8b339; --log-ts: #6f6a62; --log-ch: #f0a028;
+    --btn-from: #fcfcfc; --btn-to: #ececf0; --btn-line: #c2c6cd; --btn-text: #23252b;
+    --scrollbar: #c4c8cf;
+  }
+
+  [data-theme='industrial'] {
+    /* 工业灰 —— 经典工控 · 青蓝点缀（原版风格保留） */
+    --bg: #f2f2f2; --panel: #f7f7f7; --line: #c9c9c9; --strip: #efefef; --chrome: #efefef; --chrome-text: #777777;
+    --text: #333333; --text2: #555555; --text3: #888888;
+    --accent: #2aa9e0; --accent-hi: #35b5ec; --accent-to: #1d8ec2; --accent-line: #1d8ec2; --accent-text: #ffffff;
+    --topbar-from: #4a4a4a; --topbar-to: #363636; --topbar-text: #ffffff; --topbar-sub: #aaaaaa; --topbar-nav: #bbbbbb;
+    --table: #ffffff; --zebra: #f3f6f9; --row-hover: #eaf3fb; --sel: #1b4f8a; --sel-text: #ffffff; --sel-sub: #cfe3f5;
+    --input: #ffffff; --input-line: #ababab;
+    --st-pass: #1a7f37; --st-fail: #cf222e; --st-testing: #e8a800; --st-idle: #e0e0e0; --st-offline: #999999;
+    --log-bg: #ffffff; --log-info: #333333; --log-warn: #9a6700; --log-ts: #888888; --log-ch: #0369b1;
+    --btn-from: #fcfcfc; --btn-to: #e9e9e9; --btn-line: #ababab; --btn-text: #333333;
+    --scrollbar: #c4c4c4;
+  }
+
+  [data-theme='gundam'] {
+    /* 高达 —— RX-78 白底 · 藏青描边 · 红主色 · 蓝选中 · 黄点缀 */
+    --bg: #e8eaef; --panel: #ffffff; --line: #2a4a8a; --strip: #e3eaf7; --chrome: #1f3864; --chrome-text: #b9c9ea;
+    --text: #1a2233; --text2: #45506b; --text3: #8a93a8;
+    --accent: #d2342c; --accent-hi: #e84a3c; --accent-to: #a32720; --accent-line: #a32720; --accent-text: #ffffff;
+    --topbar-from: #24407a; --topbar-to: #16294f; --topbar-text: #ffffff; --topbar-sub: #8fa8d8; --topbar-nav: #b9c9ea;
+    --table: #ffffff; --zebra: #eef1f7; --row-hover: #e4ebf7; --sel: #2a5db0; --sel-text: #ffffff; --sel-sub: #cfe0ff;
+    --input: #ffffff; --input-line: #9aa7c4;
+    --st-pass: #1f9d55; --st-fail: #d2342c; --st-testing: #e3a008; --st-idle: #eef1f7; --st-offline: #9aa3b5;
+    --log-bg: #101d38; --log-info: #d5e0f5; --log-warn: #f5c518; --log-ts: #6f83b3; --log-ch: #ff7b6e;
+    --btn-from: #ffffff; --btn-to: #e8ecf4; --btn-line: #2a4a8a; --btn-text: #1f3864;
+    --scrollbar: #9aa7c4;
+  }
+
+  [data-theme='cyberpunk'] {
+    /* 赛博朋克 v2 —— 近黑紫底 · 霓虹青 × 品红 × 电光黄，配网格/扫描线/光晕特效（见文件底部特效层） */
+    --bg: #050308; --panel: #0b0614; --line: #2b1245; --strip: #150a26; --chrome: #08040f; --chrome-text: #7a5fa8;
+    --text: #d9f2ff; --text2: #9d7fd4; --text3: #5e4a85;
+    --accent: #00f0ff; --accent-hi: #7df9ff; --accent-to: #00b3c8; --accent-line: #00c8dd; --accent-text: #02181c;
+    --topbar-from: #0d0518; --topbar-to: #040209; --topbar-text: #eaf7ff; --topbar-sub: #6b5394; --topbar-nav: #9d7fd4;
+    --table: #0a0512; --zebra: #0e0719; --row-hover: #1b0f31; --sel: #ff2e88; --sel-text: #ffffff; --sel-sub: #ffc7e3;
+    --input: #070310; --input-line: #2b1245;
+    --st-pass: #39ff88; --st-fail: #ff2e63; --st-testing: #f9f002; --st-idle: #c8b8e8; --st-offline: #4a3a68;
+    --log-bg: #040209; --log-info: #8fe8ff; --log-warn: #f9f002; --log-ts: #4a3a68; --log-ch: #00f0ff;
+    --btn-from: #1a0f2e; --btn-to: #120a20; --btn-line: #3d1c66; --btn-text: #9d7fd4;
+    --scrollbar: #3d1c66;
+  }
+
+  [data-theme='meadow'] {
+    /* 原野 —— 手绘水彩：奶油纸底 · 天空蓝 · 苔藓绿 · 暖棕描边 */
+    --bg: #f3ecd9; --panel: #faf5e8; --line: #d9cbaa; --strip: #efe6cd; --chrome: #e9dfc4; --chrome-text: #8a7d64;
+    --text: #4a4238; --text2: #7a6f5c; --text3: #a89a80;
+    --accent: #5b9bc4; --accent-hi: #7cb6da; --accent-to: #4a86ad; --accent-line: #3f779e; --accent-text: #ffffff;
+    --topbar-from: #6ba8c9; --topbar-to: #4a86ad; --topbar-text: #ffffff; --topbar-sub: #d8eaf5; --topbar-nav: #e3f0f8;
+    --table: #fffdf5; --zebra: #f6efdd; --row-hover: #eaf3f9; --sel: #dd8452; --sel-text: #ffffff; --sel-sub: #ffe8d3;
+    --input: #fffdf5; --input-line: #d3c4a0;
+    --st-pass: #6fa15c; --st-fail: #d25b4e; --st-testing: #e0a92e; --st-idle: #f2e9d2; --st-offline: #b0a48c;
+    --log-bg: #33413a; --log-info: #d8e4d0; --log-warn: #e8c46a; --log-ts: #8ba392; --log-ch: #8ecae6;
+    --btn-from: #fffdf5; --btn-to: #f0e6cc; --btn-line: #d3c4a0; --btn-text: #4a4238;
+    --scrollbar: #d3c4a0;
+  }
+
+  [data-theme='nord'] {
+    /* 极光 —— Nord 冷蓝灰，克制的高级感 */
+    --bg: #2e3440; --panel: #3b4252; --line: #4c566a; --strip: #434c5e; --chrome: #262b36; --chrome-text: #7b88a1;
+    --text: #eceff4; --text2: #b0bacb; --text3: #6b7690;
+    --accent: #88c0d0; --accent-hi: #9fd3e2; --accent-to: #6fa9ba; --accent-line: #5e97a8; --accent-text: #1c2430;
+    --topbar-from: #39404f; --topbar-to: #23272f; --topbar-text: #eceff4; --topbar-sub: #7b88a1; --topbar-nav: #aab6cc;
+    --table: #333a47; --zebra: #374050; --row-hover: #3f4a5e; --sel: #5e81ac; --sel-text: #ffffff; --sel-sub: #cfe0f5;
+    --input: #2b303b; --input-line: #4c566a;
+    --st-pass: #a3be8c; --st-fail: #bf616a; --st-testing: #ebcb8b; --st-idle: #d8dee9; --st-offline: #5b6679;
+    --log-bg: #242933; --log-info: #c3cdd9; --log-warn: #ebcb8b; --log-ts: #6b7690; --log-ch: #88c0d0;
+    --btn-from: #434c5e; --btn-to: #39404f; --btn-line: #4c566a; --btn-text: #d8dee9;
+    --scrollbar: #4c566a;
+  }
+
+  [data-theme='solarized'] {
+    /* 暖阳 —— Solarized 米纸底 + 墨青顶栏，强光环境可读性最好 */
+    --bg: #fdf6e3; --panel: #faf3de; --line: #ddd0ae; --strip: #f1e6c8; --chrome: #eee3c2; --chrome-text: #93a1a1;
+    --text: #586e75; --text2: #657b83; --text3: #93a1a1;
+    --accent: #cb4b16; --accent-hi: #e05a1d; --accent-to: #b04012; --accent-line: #a83d10; --accent-text: #ffffff;
+    --topbar-from: #073642; --topbar-to: #002b36; --topbar-text: #fdf6e3; --topbar-sub: #71919c; --topbar-nav: #93b3bc;
+    --table: #fffdf6; --zebra: #f7f0dd; --row-hover: #f3e9cf; --sel: #268bd2; --sel-text: #ffffff; --sel-sub: #d6ecfa;
+    --input: #fffdf6; --input-line: #d3c6a5;
+    --st-pass: #859900; --st-fail: #dc322f; --st-testing: #b58900; --st-idle: #eee8d5; --st-offline: #b3aa92;
+    --log-bg: #002b36; --log-info: #b8c8bd; --log-warn: #d9a821; --log-ts: #5b7a84; --log-ch: #2aa198;
+    --btn-from: #fffdf4; --btn-to: #f1e8cf; --btn-line: #d3c6a5; --btn-text: #586e75;
+    --scrollbar: #d3c6a5;
+  }
+}
+
+/* ============================================================
+   主题特效层 —— 不止换色，给个性主题加"质感"
+   ============================================================ */
+
+/* 赛博朋克：霓虹网格底纹 */
+[data-theme='cyberpunk'] body {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--accent) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 5%, transparent) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+/* 赛博朋克：面板霓虹光晕 */
+[data-theme='cyberpunk'] .panel {
+  box-shadow:
+    0 0 24px color-mix(in srgb, var(--accent) 8%, transparent),
+    inset 0 0 24px color-mix(in srgb, var(--accent) 4%, transparent);
+}
+/* 赛博朋克：等宽字体加宽字距（终端排版感） */
+[data-theme='cyberpunk'] .font-mono { letter-spacing: 0.04em; }
+/* 赛博朋克：按钮悬停带电弧光 */
+[data-theme='cyberpunk'] .btn-gray:hover:not(:disabled) {
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 45%, transparent);
+  border-color: var(--accent-line);
+}
+
+/* 赛博朋克：CRT 扫描线覆层 */
+[data-theme='cyberpunk'] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.14) 0 1px, transparent 1px 3px);
+}
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+  body {
+    color: var(--text);
+    min-height: 100vh;
+    background-color: var(--bg);
+    font-family: "Microsoft YaHei UI", "Noto Sans SC", Arial, sans-serif;
+  }
+  /* 编号 / 工位号 / 参数 / 日志一律等宽字体（agent.md §4.2） */
+  code, kbd, pre, .font-mono {
+    font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace !important;
+  }
+}
+
+@layer components {
+  /* 面板：主题变量驱动 */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+  }
+  /* 普通按钮（主题变量驱动） */
+  .btn-gray {
+    background: linear-gradient(180deg, var(--btn-from), var(--btn-to));
+    border: 1px solid var(--btn-line);
+    color: var(--btn-text);
+  }
+  .btn-gray:hover:not(:disabled) { filter: brightness(1.08); }
+  .btn-gray:disabled { opacity: .5; cursor: not-allowed; }
+}
+
+/* 滚动条 */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--chrome); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 5px; border: 2px solid var(--chrome); }
+::-webkit-scrollbar-thumb:hover { filter: brightness(1.25); }
+
+/* Logo 颜色（顶栏撞色修正）：与顶栏底色保证对比 */
+:root, [data-theme='dark'] { --logo: #f0a028; }        /* 琥珀 × 深石墨顶栏 */
+[data-theme='light'] { --logo: #d97e12; }              /* 深琥珀 × 白顶栏 */
+[data-theme='industrial'] { --logo: #35a3e8; }         /* 亮青 × 深灰顶栏 */
+[data-theme='gundam'] { --logo: #f5c518; }             /* V 天线黄 × 藏青顶栏 */
+[data-theme='cyberpunk'] { --logo: #00f0ff; }          /* 霓虹青 × 近黑顶栏 */
+[data-theme='meadow'] { --logo: #ffffff; }             /* 白 × 天空蓝顶栏 */
+[data-theme='nord'] { --logo: #88c0d0; }               /* 霜青 × 蓝灰顶栏 */
+[data-theme='solarized'] { --logo: #e8920f; }          /* 亮橙 × 墨青顶栏 */

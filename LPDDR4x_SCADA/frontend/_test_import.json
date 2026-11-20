@@ -1,0 +1,434 @@
+{
+  "name": "IMPORT_TEST_8Gb",
+  "rankEnabled": true,
+  "pl1Enabled": true,
+  "pl2Enabled": true,
+  "rankCapacityGb": [
+    1,
+    1
+  ],
+  "channels": {
+    "ch1": true,
+    "ch2": true
+  },
+  "mr": {
+    "ch1": [
+      {
+        "name": "MR5_2",
+        "value": "",
+        "checked": true
+      },
+      {
+        "name": "MR6_2",
+        "value": "",
+        "checked": true
+      },
+      {
+        "name": "MR7_2",
+        "value": "",
+        "checked": true
+      },
+      {
+        "name": "MR8_2",
+        "value": "",
+        "checked": true
+      }
+    ],
+    "ch2": [
+      {
+        "name": "MR5_2",
+        "value": "",
+        "checked": true
+      },
+      {
+        "name": "MR6_2",
+        "value": "",
+        "checked": true
+      },
+      {
+        "name": "MR7_2",
+        "value": "",
+        "checked": true
+      },
+      {
+        "name": "MR8_2",
+        "value": "",
+        "checked": true
+      }
+    ]
+  },
+  "params": [
+    {
+      "id": 1,
+      "name": "VDD1(mV)",
+      "value": "180",
+      "checked": true,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 2,
+      "name": "VDD2H(mV)",
+      "value": "110",
+      "checked": true,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 3,
+      "name": "VDD2L(mV)",
+      "value": "110",
+      "checked": true,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 4,
+      "name": "VDDQ(mV)",
+      "value": "30",
+      "checked": true,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 5,
+      "name": "测试频率(M)",
+      "value": "4266",
+      "checked": true,
+      "options": [
+        "3733",
+        "4266",
+        "4800"
+      ],
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 6,
+      "name": "锁定测试容量(MB)",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 7,
+      "name": "TDQS2DQ",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 8,
+      "name": "TRCD",
+      "value": "10",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 9,
+      "name": "TRP",
+      "value": "20",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 10,
+      "name": "TRAS时序",
+      "value": "30",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 11,
+      "name": "TWR时序",
+      "value": "40",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 12,
+      "name": "TXRefCnt时序",
+      "value": "500",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 13,
+      "name": "TRPAB",
+      "value": "59",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 14,
+      "name": "TRC",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 15,
+      "name": "TRFC",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 16,
+      "name": "TRFCPB",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 17,
+      "name": "TXP",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 18,
+      "name": "TRTP",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 19,
+      "name": "TWTR",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 20,
+      "name": "TPBR2PBR",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 21,
+      "name": "TPBR2ACT",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 22,
+      "name": "TR2MRW",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 23,
+      "name": "TW2MRW",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 24,
+      "name": "TMRR2MRW",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 25,
+      "name": "TMRW",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 26,
+      "name": "TMRD",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 27,
+      "name": "TMRWCKEL",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 28,
+      "name": "TPDE",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 29,
+      "name": "TPDX",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 30,
+      "name": "TMRRI",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 31,
+      "name": "TRRD",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 32,
+      "name": "TFAW",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    },
+    {
+      "id": 33,
+      "name": "TZQCS",
+      "value": "0",
+      "checked": false,
+      "start": "",
+      "step": "",
+      "end": ""
+    }
+  ],
+  "pl2": {
+    "testMode": "全映射读写测试",
+    "ascEnabled": true,
+    "ascOrder": "升序",
+    "patterns": [
+      {
+        "id": 1,
+        "name": "test_random_value",
+        "checked": true,
+        "order": "1",
+        "param": ""
+      },
+      {
+        "id": 2,
+        "name": "test_xor_comparison",
+        "checked": true,
+        "order": "2",
+        "param": ""
+      },
+      {
+        "id": 3,
+        "name": "test_sub_comparison",
+        "checked": true,
+        "order": "3",
+        "param": ""
+      },
+      {
+        "id": 4,
+        "name": "test_mul_comparison",
+        "checked": true,
+        "order": "4",
+        "param": ""
+      },
+      {
+        "id": 5,
+        "name": "test_div_comparison",
+        "checked": true,
+        "order": "5",
+        "param": ""
+      },
+      {
+        "id": 6,
+        "name": "test_or_comparison",
+        "checked": true,
+        "order": "6",
+        "param": ""
+      },
+      {
+        "id": 7,
+        "name": "test_and_comparison",
+        "checked": true,
+        "order": "7",
+        "param": ""
+      },
+      {
+        "id": 8,
+        "name": "test_seqinc_comparison",
+        "checked": true,
+        "order": "8",
+        "param": ""
+      },
+      {
+        "id": 9,
+        "name": "test_eigenvalue_comparison",
+        "checked": true,
+        "order": "9",
+        "param": ""
+      }
+    ]
+  }
+}
